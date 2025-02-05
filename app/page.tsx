@@ -62,7 +62,7 @@ export default function MainPage() {
   }
 
   return (
-    <section className="relative bg-gray-900 text-white overflow-hidden">
+    <section className="relative text-white overflow-hidden">
       {/* Fixed, full-screen background */}
       <SpaceBackground />
 
