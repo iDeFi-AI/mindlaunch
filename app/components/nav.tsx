@@ -1,15 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { FaHome, FaBriefcase, FaUserTie } from 'react-icons/fa';
+import { FaBrain, FaInfoCircle } from 'react-icons/fa';
 import { BsFillRocketFill } from "react-icons/bs";
 
 // Updated navigation items for MindLaunch pages with corrected icons
 const navItems = {
-  '/': { name: 'Home', icon: <FaHome size={18} /> },
-  '/portfolio': { name: 'Portfolio', icon: <FaBriefcase size={18} /> },
-  '/about': { name: 'About', icon: <FaUserTie size={18} /> },
-  '/launchpad': { name: 'Launchpad', icon: <BsFillRocketFill  size={18} /> },
+  '/': { name: 'Home', icon: <FaBrain size={18} /> },
+  '/about': { name: 'About', icon: <FaInfoCircle size={18} /> },
+  '/launchpad': { name: 'Launch', icon: <BsFillRocketFill  size={18} /> },
 };
 
 export function Navbar() {

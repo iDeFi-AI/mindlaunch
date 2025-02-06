@@ -18,36 +18,59 @@ import { BiNetworkChart } from 'react-icons/bi'
 
 export default function MainPage() {
   // Local state for pitch form submission.
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string
+    email: string
+    pitch: string
+    file: File | null
+  }>({
     name: '',
     email: '',
     pitch: '',
+    file: null,
   })
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState('')
 
+  // Handle text input changes.
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  // Handle file selection.
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData({ ...formData, file: e.target.files[0] })
+    }
+  }
+
+  // Submit the form data (including file) using FormData.
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
     setMessage('')
 
+    // Create a FormData instance to handle the file upload.
+    const data = new FormData()
+    data.append('name', formData.name)
+    data.append('email', formData.email)
+    data.append('pitch', formData.pitch)
+    if (formData.file) {
+      data.append('file', formData.file)
+    }
+
     try {
       const res = await fetch('/api/submit-pitch', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: data,
       })
       if (res.ok) {
         setMessage(
-          'Your vision has been received! Our AI will review your pitch and chart the course ahead.'
+          'Your pitch has been received! We will review it and contact you soon.'
         )
-        setFormData({ name: '', email: '', pitch: '' })
+        setFormData({ name: '', email: '', pitch: '', file: null })
       } else {
         setMessage(
           'An error occurred while submitting your pitch. Please try again later.'
@@ -62,7 +85,7 @@ export default function MainPage() {
   }
 
   return (
-    <section className="relative text-white overflow-hidden">
+    <section className="relative text-orange-300 overflow-hidden">
       {/* Fixed, full-screen background */}
       <SpaceBackground />
 
@@ -70,18 +93,8 @@ export default function MainPage() {
       <div className="container mx-auto px-6 mt-24 py-12 relative z-10 space-y-16">
         {/* Intro & Logo Section */}
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          {/* Logo integrated within the intro */}
           <div className="p-8 bg-black rounded-lg shadow-lg">
-            <div className="flex justify-center">
-              <Image
-                src={logo}
-                alt="MindLaunch.ai Logo"
-                className="object-contain"
-                width={200} // Adjust size as needed
-                height={50} // Adjust size as needed
-              />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-orange-300">
               Welcome to MindLaunch.AI
             </h1>
             <p className="text-lg md:text-xl text-gray-300">
@@ -90,7 +103,7 @@ export default function MainPage() {
             <p className="text-lg md:text-xl text-gray-300">
               Specializing in AI, Blockchain, and Quantum breakthroughs, we navigate new frontiers in technology.
             </p>
-            <p className="text-lg md:text-xl text-gray-300">
+            <p className="text-lg md:text-xl mt-4 text-gray-300">
               Join us on a journey where every idea fuels growth, and together we chart the future of venture capital.
             </p>
           </div>
@@ -99,7 +112,7 @@ export default function MainPage() {
         {/* Our Story Section */}
         <div className="max-w-4xl mx-auto">
           <div className="p-8 bg-black rounded-lg shadow-lg">
-            <h2 className="text-3xl font-semibold mb-4 text-center text-white">
+            <h2 className="text-3xl font-semibold mb-4 text-center text-orange-300">
               Our Story
             </h2>
             <p className="text-lg text-gray-300 leading-relaxed mb-4">
@@ -116,55 +129,51 @@ export default function MainPage() {
         {/* Investment Journey Section */}
         <div className="max-w-4xl mx-auto">
           <div className="p-8 bg-black rounded-lg shadow-lg text-center">
-            <h2 className="text-3xl font-semibold mb-4 text-white">
+            <h2 className="text-3xl font-semibold mb-4 text-orange-300">
               Our Investment Journey
             </h2>
             <p className="text-lg text-gray-300 mb-6">
               We invest in startups that dare to dream big—nurturing early-stage innovators, empowering token-based ventures, and scaling promising enterprises.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-              {/* Artificial Intelligence */}
               <div className="flex flex-col items-center">
-                <FaRobot size={48} className="text-white" />
+                <FaRobot size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Artificial Intelligence</span>
               </div>
               <div className="flex flex-col items-center">
-                <SiOpenai size={48} className="text-white" />
+                <SiOpenai size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Machine Learning</span>
               </div>
-              {/* Blockchain */}
               <div className="flex flex-col items-center">
-                <SiEthereum size={48} className="text-white" />
+                <SiEthereum size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Blockchain</span>
               </div>
               <div className="flex flex-col items-center">
-                <SiSolidity size={48} className="text-white" />
+                <SiSolidity size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Smart Contracts</span>
               </div>
               <div className="flex flex-col items-center">
-                <SiGraphql size={48} className="text-white" />
+                <SiGraphql size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Decentralized Apps</span>
               </div>
-              {/* Quantum Technologies */}
               <div className="flex flex-col items-center">
-                <BiNetworkChart size={48} className="text-white" />
+                <BiNetworkChart size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Quantum Computing</span>
               </div>
               <div className="flex flex-col items-center">
-                <SiTypescript size={48} className="text-white" />
+                <SiTypescript size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Quantum Software</span>
               </div>
-              {/* Supporting Technologies */}
               <div className="flex flex-col items-center">
-                <SiKubernetes size={48} className="text-white" />
+                <SiKubernetes size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Scalable Infrastructure</span>
               </div>
               <div className="flex flex-col items-center">
-                <FaAws size={48} className="text-white" />
+                <FaAws size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">Cloud Platforms</span>
               </div>
               <div className="flex flex-col items-center">
-                <SiTerraform size={48} className="text-white" />
+                <SiTerraform size={48} className="text-orange-300" />
                 <span className="mt-2 text-lg text-gray-300">DevOps</span>
               </div>
             </div>
@@ -174,8 +183,8 @@ export default function MainPage() {
         {/* Education & Self-Made Excellence Section */}
         <div className="max-w-4xl mx-auto">
           <div className="p-8 bg-black rounded-lg shadow-lg">
-            <h2 className="text-3xl font-semibold mb-4 text-center text-white flex items-center justify-center gap-2">
-              <FaGraduationCap className="text-white" /> Education & Self-Made Excellence
+            <h2 className="text-3xl font-semibold mb-4 text-center text-orange-300 flex items-center justify-center gap-2">
+              <FaGraduationCap className="text-orange-300" /> Education & Self-Made Excellence
             </h2>
             <p className="text-lg text-gray-300 leading-relaxed mb-4">
               At MindLaunch.ai, groundbreaking innovation isn’t measured solely by formal credentials.
@@ -191,17 +200,17 @@ export default function MainPage() {
         {/* Call to Action Section */}
         <div className="max-w-4xl mx-auto">
           <div className="p-8 bg-black rounded-lg shadow-lg text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white flex items-center justify-center gap-2">
-              <FaHandshake className="text-white" /> Join the Expedition
+            <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-orange-300 flex items-center justify-center gap-2">
+              <FaHandshake className="text-orange-300" /> Join the Expedition
             </h2>
             <p className="text-lg text-gray-300 mb-6">
               Are you a visionary founder with a disruptive idea? Embark on a journey with MindLaunch.ai and help reshape the future of technology.
             </p>
             <a
-              href="https://calendly.com/mindlaunch" // Update with your booking link if needed.
+              href="https://calendly.com/mindlaunch"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-lg transition-transform duration-200 hover:scale-105"
+              className="inline-block bg-gray-800 hover:bg-gray-700 text-orange-300 font-semibold py-3 px-8 rounded-lg transition-transform duration-200 hover:scale-105"
             >
               Schedule a Consultation
             </a>
@@ -211,13 +220,17 @@ export default function MainPage() {
         {/* Pitch Submission Section */}
         <div className="max-w-4xl mx-auto">
           <div className="p-8 bg-black rounded-lg shadow-lg">
-            <h2 className="text-2xl font-semibold mb-4 text-center text-white">
-              Share Your Vision for AI Review
+            <h2 className="text-2xl font-semibold mb-4 text-center text-orange-300">
+              Submit Your Pitch
             </h2>
             <p className="text-lg text-gray-300 mb-6 text-center">
-              Every transformative journey begins with a spark. Submit your pitch below and let our AI system illuminate the potential of your idea.
+              Share your vision by filling out the form below and attaching your pitch document (PDF, DOC, etc.). We’ll receive your email along with the attached file.
             </p>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+              encType="multipart/form-data"
+            >
               <div>
                 <label htmlFor="name" className="block text-gray-300 text-lg">
                   Name
@@ -248,7 +261,7 @@ export default function MainPage() {
               </div>
               <div>
                 <label htmlFor="pitch" className="block text-gray-300 text-lg">
-                  Your Pitch
+                  Pitch Description
                 </label>
                 <textarea
                   id="pitch"
@@ -260,17 +273,33 @@ export default function MainPage() {
                   required
                 />
               </div>
+              <div>
+                <label htmlFor="file" className="block text-gray-300 text-lg">
+                  Attach Your Pitch Document
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  onChange={handleFileChange}
+                  accept=".pdf,.doc,.docx"
+                  className="mt-2 w-full p-3 rounded bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                  required
+                />
+              </div>
               <div className="flex justify-center">
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-lg transition-transform duration-200 inline-flex items-center gap-2"
+                  className="bg-gray-800 hover:bg-gray-700 text-orange-300 font-semibold py-3 px-8 rounded-lg transition-transform duration-200 inline-flex items-center gap-2"
                 >
-                  {submitting ? 'Submitting...' : 'Submit for AI Review'}
+                  {submitting ? 'Submitting...' : 'Submit Pitch'}
                 </button>
               </div>
               {message && (
-                <p className="text-center text-gray-300 mt-4 text-lg">{message}</p>
+                <p className="text-center text-gray-300 mt-4 text-lg">
+                  {message}
+                </p>
               )}
             </form>
           </div>

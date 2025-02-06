@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { FaLinkedin, FaTwitter, FaHandshake } from "react-icons/fa";
 import type { StaticImageData } from "next/image";
 
@@ -23,36 +22,12 @@ import keatonPic from "public/keaton.png";
 import shawnPic from "public/shawn.png";
 import agentPic from "public/agent.png";
 
-// Strategic Partners
-const partners: Profile[] = [
-  {
-    name: "Keaton McCune",
-    image: keatonPic,
-    role: "Co-Founder & Visionary",
-    description:
-      "Keaton leads with a visionary outlook, inspiring our collaborative efforts and ensuring every innovation brings us closer together in our mission to transform technology.",
-    social: {
-      linkedin: "https://linkedin.com/in/keaton-m",
-      twitter: "https://twitter.com/K3Y_10",
-    },
-  },
-];
-
-// Intelligent Agent
-const intelligentAgent: Profile = {
-  name: "Intelligent Agent",
-  image: agentPic,
-  role: "Non-Fungible Operational Agent",
-  description:
-    "An intelligent non-fungible agent that assists with business operations, analytics, and assessments while supporting the entire MindLaunch ecosystem.",
-};
-
-// Team Members
-const teamMembers: Profile[] = [
+// Combined Profiles Array
+const profiles: Profile[] = [
   {
     name: "Shawn Sauicer",
     image: shawnPic,
-    role: "Partner & Collaboration Lead",
+    role: "General Partner",
     description:
       "Shawn drives operational excellence and strategic partnerships, fostering a culture of shared success. Together, we combine our strengths to support groundbreaking innovation.",
     social: {
@@ -60,10 +35,25 @@ const teamMembers: Profile[] = [
       twitter: "https://x.com/shawn_saucier",
     },
   },
+  {
+    name: "Keaton McCune",
+    image: keatonPic,
+    role: "Technical Partner",
+    description:
+      "Keaton leads with a visionary outlook, inspiring our collaborative efforts and ensuring every innovation brings us closer together in our mission to transform technology.",
+    social: {
+      linkedin: "https://linkedin.com/in/keaton-m",
+      twitter: "https://twitter.com/K3Y_10",
+    },
+  },
+  {
+    name: "Intelligent Agent",
+    image: agentPic,
+    role: "Non-Fungible Agent",
+    description:
+      "An intelligent non-fungible agent that assists with business operations, analytics, and assessments while supporting the entire MindLaunch ecosystem.",
+  },
 ];
-
-// Combine all profiles into one array
-const allProfiles: Profile[] = [...partners, intelligentAgent, ...teamMembers];
 
 export default function PartnersAndTeamPage() {
   return (
@@ -81,7 +71,7 @@ export default function PartnersAndTeamPage() {
       {/* Profiles Grid */}
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allProfiles.map((profile) => (
+          {profiles.map((profile) => (
             <div
               key={profile.name}
               className="flex flex-col md:flex-row items-center bg-black rounded-lg shadow-md p-4 hover:scale-105 transition-transform duration-200"
@@ -107,7 +97,7 @@ export default function PartnersAndTeamPage() {
                         href={profile.social.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-orange-600 hover:text-orange-700 cursor-pointer"
+                        className="text-orange-400 hover:text-orange-600 cursor-pointer"
                       >
                         <FaLinkedin size={20} />
                       </Link>
@@ -117,7 +107,7 @@ export default function PartnersAndTeamPage() {
                         href={profile.social.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-orange-600 hover:text-orange-700 cursor-pointer"
+                        className="text-orange-400 hover:text-orange-600 cursor-pointer"
                       >
                         <FaTwitter size={20} />
                       </Link>
@@ -141,7 +131,7 @@ export default function PartnersAndTeamPage() {
           </p>
           <Link
             href="https://calendly.com/mindlaunch"
-            className="inline-block bg-black hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105"
+            className="inline-block bg-gray-700 hover:bg-gray-500 text-orange-300 font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105"
           >
             Schedule a Meeting
           </Link>

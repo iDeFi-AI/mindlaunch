@@ -22,28 +22,6 @@ export default function Footer() {
             </li>
             <li>
               <a
-                className="flex items-center space-x-2 text-white hover:text-green-300 transition-all"
-                href="/mindlaunch-deck.pdf" // Update with your deck URL
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <FaFilePdf size={24} />
-                <span className="text-lg font-medium">Deck</span>
-              </a>
-            </li>
-            <li>
-              <a
-                className="flex items-center space-x-2 text-white hover:text-red-300 transition-all"
-                href="/pitch-guidelines.pdf" // Update with your pitch guidelines file
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <FaFilePdf size={24} />
-                <span className="text-lg font-medium">Pitch</span>
-              </a>
-            </li>
-            <li>
-              <a
                 className="flex items-center space-x-2 text-white hover:text-red-300 transition-all"
                 href="https://calendly.com/mindlaunch" // Update with your scheduling link
                 rel="noopener noreferrer"

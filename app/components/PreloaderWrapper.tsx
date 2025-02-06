@@ -45,6 +45,7 @@ export default function PreloaderWrapper({ children, onLoaded }: PreloaderWrappe
               height={150}
               className="object-contain"
             />
+            <p className="text-center">Private Equity & Venture Capital</p>
           </div>
         </div>
       ) : (
