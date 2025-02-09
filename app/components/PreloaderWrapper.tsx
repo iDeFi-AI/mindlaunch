@@ -18,7 +18,7 @@ export default function PreloaderWrapper({ children, onLoaded }: PreloaderWrappe
     const timer = setTimeout(() => {
       setIsLoading(false);
       if (onLoaded) onLoaded();
-    }, 3000);
+    }, 3500);
     return () => clearTimeout(timer);
   }, [onLoaded]);
 
