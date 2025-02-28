@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import SpaceBackground from './components/SpaceBackground' // Updated to use a static background image
-import logo from 'public/mindlaunch-logo.png' // Update with your logo image file
+import Script from 'next/script'
+import SpaceBackground from './components/SpaceBackground'
+import logo from 'public/mindlaunch-logo.png'
 import { FaHandshake, FaRobot, FaAws, FaGraduationCap } from 'react-icons/fa'
 import {
   SiEthereum,
@@ -17,73 +18,6 @@ import {
 import { BiNetworkChart } from 'react-icons/bi'
 
 export default function MainPage() {
-  // Local state for pitch form submission.
-  const [formData, setFormData] = useState<{
-    name: string
-    email: string
-    pitch: string
-    file: File | null
-  }>({
-    name: '',
-    email: '',
-    pitch: '',
-    file: null,
-  })
-  const [submitting, setSubmitting] = useState(false)
-  const [message, setMessage] = useState('')
-
-  // Handle text input changes.
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  // Handle file selection.
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData({ ...formData, file: e.target.files[0] })
-    }
-  }
-
-  // Submit the form data (including file) using FormData.
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting(true)
-    setMessage('')
-
-    // Create a FormData instance to handle the file upload.
-    const data = new FormData()
-    data.append('name', formData.name)
-    data.append('email', formData.email)
-    data.append('pitch', formData.pitch)
-    if (formData.file) {
-      data.append('file', formData.file)
-    }
-
-    try {
-      const res = await fetch('/api/submit-pitch', {
-        method: 'POST',
-        body: data,
-      })
-      if (res.ok) {
-        setMessage(
-          'Your pitch has been received! We will review it and contact you soon.'
-        )
-        setFormData({ name: '', email: '', pitch: '', file: null })
-      } else {
-        setMessage(
-          'An error occurred while submitting your pitch. Please try again later.'
-        )
-      }
-    } catch (error) {
-      setMessage(
-        'An error occurred while submitting your pitch. Please try again later.'
-      )
-    }
-    setSubmitting(false)
-  }
-
   return (
     <section className="relative text-orange-300 overflow-hidden">
       {/* Fixed, full-screen background */}
@@ -197,111 +131,27 @@ export default function MainPage() {
           </div>
         </div>
 
-        {/* Call to Action Section */}
+        {/* Call to Action Section with Fillout Form Embed */}
         <div className="max-w-4xl mx-auto">
           <div className="p-8 bg-black rounded-lg shadow-lg text-center">
             <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-orange-300 flex items-center justify-center gap-2">
               <FaHandshake className="text-orange-300" /> Join the Expedition
             </h2>
+            <p className="text-lg text-gray-300 mb-3">
+              Are you a visionary founder with a disruptive idea? 
+            </p>
             <p className="text-lg text-gray-300 mb-6">
-              Are you a visionary founder with a disruptive idea? Embark on a journey with MindLaunch.ai and help reshape the future of technology.
+            Fill out the form below to start your journey with MindLaunch.AI.
             </p>
-            <a
-              href="https://calendly.com/mindlaunch"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-gray-800 hover:bg-gray-700 text-orange-300 font-semibold py-3 px-8 rounded-lg transition-transform duration-200 hover:scale-105"
-            >
-              Schedule a Consultation
-            </a>
-          </div>
-        </div>
-
-        {/* Pitch Submission Section */}
-        <div className="max-w-4xl mx-auto">
-          <div className="p-8 bg-black rounded-lg shadow-lg">
-            <h2 className="text-2xl font-semibold mb-4 text-center text-orange-300">
-              Submit Your Pitch
-            </h2>
-            <p className="text-lg text-gray-300 mb-6 text-center">
-              Share your vision by filling out the form below and attaching your pitch document (PDF, DOC, etc.). We’ll receive your email along with the attached file.
-            </p>
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6"
-              encType="multipart/form-data"
-            >
-              <div>
-                <label htmlFor="name" className="block text-gray-300 text-lg">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="mt-2 w-full p-3 rounded bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-gray-300 text-lg">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="mt-2 w-full p-3 rounded bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="pitch" className="block text-gray-300 text-lg">
-                  Pitch Description
-                </label>
-                <textarea
-                  id="pitch"
-                  name="pitch"
-                  rows={5}
-                  value={formData.pitch}
-                  onChange={handleChange}
-                  className="mt-2 w-full p-3 rounded bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="file" className="block text-gray-300 text-lg">
-                  Attach Your Pitch Document
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  name="file"
-                  onChange={handleFileChange}
-                  accept=".pdf,.doc,.docx"
-                  className="mt-2 w-full p-3 rounded bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  required
-                />
-              </div>
-              <div className="flex justify-center">
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="bg-gray-800 hover:bg-gray-700 text-orange-300 font-semibold py-3 px-8 rounded-lg transition-transform duration-200 inline-flex items-center gap-2"
-                >
-                  {submitting ? 'Submitting...' : 'Submit Pitch'}
-                </button>
-              </div>
-              {message && (
-                <p className="text-center text-gray-300 mt-4 text-lg">
-                  {message}
-                </p>
-              )}
-            </form>
+            {/* Fillout Form Embed */}
+            <div
+              style={{ width: '100%', height: '500px' }}
+              data-fillout-id="p85xSWGPrvus"
+              data-fillout-embed-type="standard"
+              data-fillout-inherit-parameters
+              data-fillout-dynamic-resize
+            ></div>
+            <Script src="https://server.fillout.com/embed/v1/" strategy="afterInteractive" />
           </div>
         </div>
       </div>

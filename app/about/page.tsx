@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaLinkedin, FaTwitter, FaHandshake } from "react-icons/fa";
+import Script from "next/script";
 import type { StaticImageData } from "next/image";
 
 // Define a type for profile items
@@ -129,12 +130,15 @@ export default function PartnersAndTeamPage() {
           <p className="text-lg md:text-xl mb-6">
             Ready to bootstrap groundbreaking solutions in AI, Blockchain, and Quantum Technologies? Let’s connect.
           </p>
-          <Link
-            href="https://calendly.com/mindlaunch"
-            className="inline-block bg-gray-700 hover:bg-gray-500 text-orange-300 font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105"
-          >
-            Schedule a Meeting
-          </Link>
+          {/* Fillout Form Embed replacing the scheduling link */}
+          <div
+            style={{ width: "100%", height: "500px" }}
+            data-fillout-id="p85xSWGPrvus"
+            data-fillout-embed-type="standard"
+            data-fillout-inherit-parameters
+            data-fillout-dynamic-resize
+          ></div>
+          <Script src="https://server.fillout.com/embed/v1/" strategy="afterInteractive" />
         </div>
       </div>
     </section>

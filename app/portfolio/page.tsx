@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FaHandshake } from "react-icons/fa";
+import Script from "next/script";
 
 // Placeholder images and assets (update paths as needed)
 import profilePic from "public/mindlaunch-logo.png";
@@ -158,7 +159,7 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Call to Action Section */}
+      {/* Call to Action Section with Fillout Form Embed */}
       <div className="w-full max-w-5xl mt-16 mb-16 bg-black p-6 rounded-lg text-center shadow-md">
         <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-orange-300 flex items-center justify-center gap-2">
           <FaHandshake className="text-white" /> Collaborate with Us
@@ -166,14 +167,15 @@ export default function Page() {
         <p className="text-lg md:text-xl text-neutral-400 mb-6">
           Ready to bootstrap groundbreaking solutions in AI, Blockchain, and Quantum Technologies? Let’s connect.
         </p>
-        <a
-          href="https://calendly.com/mindlaunch"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-neutral-800 hover:bg-neutral-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105"
-        >
-          Schedule a Meeting
-        </a>
+        {/* Fillout Form Embed */}
+        <div
+          style={{ width: "100%", height: "500px" }}
+          data-fillout-id="p85xSWGPrvus"
+          data-fillout-embed-type="standard"
+          data-fillout-inherit-parameters
+          data-fillout-dynamic-resize
+        ></div>
+        <Script src="https://server.fillout.com/embed/v1/" strategy="afterInteractive" />
       </div>
     </section>
   );
