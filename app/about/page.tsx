@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FaLinkedin, FaTwitter, FaHandshake } from "react-icons/fa";
-import Script from "next/script";
+import { FaLinkedin, FaTwitter, FaHandshake, FaGlobe, FaBullseye } from "react-icons/fa";
 import type { StaticImageData } from "next/image";
+import { FilloutEmbed } from "../components/FilloutEmbed"; // adjust the path as needed
 
 // Define a type for profile items
 type Profile = {
@@ -56,16 +56,41 @@ const profiles: Profile[] = [
   },
 ];
 
-export default function PartnersAndTeamPage() {
+export default function AboutPage() {
   return (
-    <section className="px-6 py-12 text-white">
+    <section className="px-6 py-12 text-white space-y-16">
       {/* Page Title */}
-      <div className="max-w-4xl mx-auto bg-black rounded-lg p-6 mt-24 text-center mb-12">
+      <div className="max-w-4xl mx-auto bg-black rounded-lg p-6 mt-24 text-center">
         <h1 className="text-5xl font-bold tracking-tight text-orange-300">
-          Meet the Team
+          About MindLaunch.ai
         </h1>
         <p className="mt-4 text-lg">
-          At MindLaunch.ai, success is built together. Our community of strategic partners, an intelligent agent, and our dedicated team drive disruptive innovation in AI, blockchain, and quantum technologies.
+          At MindLaunch.ai, we believe in transforming visionary ideas into impactful realities.
+          Our community of strategic partners, innovative founders, and our intelligent agent drive disruptive innovation in AI, blockchain, and quantum technologies.
+        </p>
+      </div>
+
+      {/* Our Mission & Vision */}
+      <div className="max-w-5xl mx-auto bg-black/90 rounded-lg p-6 shadow-md">
+        <h2 className="text-3xl font-bold text-orange-300 text-center mb-4 flex items-center justify-center gap-2">
+          <FaGlobe className="text-orange-300 text-4xl md:text-5xl transition-transform duration-200 hover:scale-110" /> Our Mission & Vision
+        </h2>
+        <p className="text-lg text-gray-300 leading-relaxed mb-4">
+          Our mission is to empower groundbreaking startups and visionary founders by providing the tools, mentorship, and capital needed to turn ideas into market-leading innovations.
+          We envision a future where creative genius meets practical execution to drive lasting impact.
+        </p>
+        <p className="text-lg text-gray-300 leading-relaxed">
+          Leveraging our robust ecosystem and advanced analytics, we connect entrepreneurs with strategic partners and investors, accelerating growth and innovation.
+        </p>
+      </div>
+
+      {/* Meet the Team */}
+      <div className="max-w-4xl mx-auto bg-black rounded-lg p-6 text-center">
+        <h2 className="text-5xl font-bold tracking-tight text-orange-300">
+          Meet the Team
+        </h2>
+        <p className="mt-4 text-lg">
+          Success is built together. Our team of strategic partners, technical experts, and our intelligent agent form the backbone of our innovative ecosystem.
         </p>
       </div>
 
@@ -121,24 +146,22 @@ export default function PartnersAndTeamPage() {
         </div>
       </div>
 
-      {/* Call to Action Section */}
+      {/* Call to Action Section with FormEmbed */}
       <div className="max-w-5xl mx-auto mt-16 mb-16 text-center">
-        <div className="bg-black p-6 rounded-lg shadow-md border border-gray-700">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-orange-300 flex items-center justify-center gap-2">
-            <FaHandshake className="text-white" /> Collaborate with Us
+      <div id="partnerForm" className="max-w-4xl mx-auto bg-black rounded-lg shadow-lg p-8">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-center text-orange-300 flex items-center justify-center gap-2">
+            <FaHandshake className="text-orange-300 text-4xl md:text-5xl transition-transform duration-200 hover:scale-110" /> Partner Application
           </h2>
-          <p className="text-lg md:text-xl mb-6">
-            Ready to bootstrap groundbreaking solutions in AI, Blockchain, and Quantum Technologies? Let’s connect.
+          <p className="text-lg text-gray-300 mb-6 text-center">
+            Are you a VC or VP interested in strategic investments? Complete the form below to join our Closed Partner Program.
           </p>
-          {/* Fillout Form Embed replacing the scheduling link */}
-          <div
-            style={{ width: "100%", height: "500px" }}
-            data-fillout-id="p85xSWGPrvus"
+          <FilloutEmbed
+            style={{ width: '100%', height: '500px' }}
+            data-fillout-id="mARgY98URXus"
             data-fillout-embed-type="standard"
             data-fillout-inherit-parameters
             data-fillout-dynamic-resize
-          ></div>
-          <Script src="https://server.fillout.com/embed/v1/" strategy="afterInteractive" />
+          />
         </div>
       </div>
     </section>
