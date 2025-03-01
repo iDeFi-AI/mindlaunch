@@ -30,7 +30,7 @@ const profiles: Profile[] = [
     image: shawnPic,
     role: "General Partner",
     description:
-      "Shawn drives operational excellence and strategic partnerships, fostering a culture of shared success. Together, we combine our strengths to support groundbreaking innovation.",
+      "Shawn drives operational excellence and strategic partnerships, fostering a culture of shared success. His vision is central to transforming innovative ideas into profitable ventures.",
     social: {
       linkedin: "https://www.linkedin.com/in/shawn-saucier/",
       twitter: "https://x.com/shawn_saucier",
@@ -41,7 +41,7 @@ const profiles: Profile[] = [
     image: keatonPic,
     role: "Technical Partner",
     description:
-      "Keaton leads with a visionary outlook, inspiring our collaborative efforts and ensuring every innovation brings us closer together in our mission to transform technology.",
+      "Keaton leads with a visionary outlook, ensuring our technology and strategic execution set new benchmarks. His expertise bridges the gap between cutting‑edge tech and market success.",
     social: {
       linkedin: "https://linkedin.com/in/keaton-m",
       twitter: "https://twitter.com/K3Y_10",
@@ -50,9 +50,9 @@ const profiles: Profile[] = [
   {
     name: "Intelligent Agent",
     image: agentPic,
-    role: "Non-Fungible Agent",
+    role: "Non‑Fungible Agent",
     description:
-      "An intelligent non-fungible agent that assists with business operations, analytics, and assessments while supporting the entire MindLaunch ecosystem.",
+      "Our Intelligent Agent is an AI‑driven virtual advisor that supports business operations, analytics, and technical guidance, empowering both founders and partners – especially those without a technical background.",
   },
 ];
 
@@ -65,8 +65,7 @@ export default function AboutPage() {
           About MindLaunch.ai
         </h1>
         <p className="mt-4 text-lg">
-          At MindLaunch.ai, we believe in transforming visionary ideas into impactful realities.
-          Our community of strategic partners, innovative founders, and our intelligent agent drive disruptive innovation in AI, blockchain, and quantum technologies.
+          At MindLaunch.ai, we transform visionary ideas into impactful realities. Our unique ecosystem blends traditional venture discipline with decentralized innovation, uniting strategic partners, innovative founders, and advanced AI through our LaunchPad.
         </p>
       </div>
 
@@ -76,11 +75,29 @@ export default function AboutPage() {
           <FaGlobe className="text-orange-300 text-4xl md:text-5xl transition-transform duration-200 hover:scale-110" /> Our Mission & Vision
         </h2>
         <p className="text-lg text-gray-300 leading-relaxed mb-4">
-          Our mission is to empower groundbreaking startups and visionary founders by providing the tools, mentorship, and capital needed to turn ideas into market-leading innovations.
-          We envision a future where creative genius meets practical execution to drive lasting impact.
+          Our mission is to empower groundbreaking startups and visionary founders by providing the tools, mentorship, and capital needed to create market-leading innovations. We envision a future where creative genius and practical execution converge, driving sustainable growth and profitability.
         </p>
         <p className="text-lg text-gray-300 leading-relaxed">
-          Leveraging our robust ecosystem and advanced analytics, we connect entrepreneurs with strategic partners and investors, accelerating growth and innovation.
+          By leveraging our robust ecosystem, we connect entrepreneurs with strategic partners and investors, catalyzing transformative change across AI, blockchain, and quantum technologies.
+        </p>
+      </div>
+
+      {/* Our Ecosystem & Approach */}
+      <div className="max-w-5xl mx-auto bg-black/90 rounded-lg p-6 shadow-md">
+        <h2 className="text-3xl font-bold text-orange-300 text-center mb-4">
+          Our Ecosystem & Approach
+        </h2>
+        <p className="text-lg text-gray-300 leading-relaxed mb-4">
+          MindLaunch.ai’s LaunchPad stands apart through a dual funding model that combines a traditional closed partner program with a decentralized open community pool.
+        </p>
+        <p className="text-lg text-gray-300 leading-relaxed mb-4">
+          <strong>Closed Partner Program:</strong> Designed for strategic VC and institutional partners, this program ensures early, high‑impact investments with rigorous due diligence and personalized support.
+        </p>
+        <p className="text-lg text-gray-300 leading-relaxed mb-4">
+          <strong>Open Community Pool:</strong> Embracing democratized capital, this pool allows contributions starting at <strong>$100</strong> and aggregates funds until a threshold of <strong>$100K</strong> is reached. With smart contracts automating fund allocation (70% to startups, 20% to ecosystem development, and 10% reserved), we ensure transparency, security, and broad community participation.
+        </p>
+        <p className="text-lg text-gray-300 leading-relaxed">
+          With our cutting‑edge iNFAgent supporting both technical and non‑technical founders, we provide hands‑on guidance and real‑time insights, ensuring every participant has the tools to succeed. Our ecosystem is profit‑driven, sustainable, and built to scale, uniting a global network of innovators and investors.
         </p>
       </div>
 
@@ -90,7 +107,7 @@ export default function AboutPage() {
           Meet the Team
         </h2>
         <p className="mt-4 text-lg">
-          Success is built together. Our team of strategic partners, technical experts, and our intelligent agent form the backbone of our innovative ecosystem.
+          Our strength lies in our team of strategic partners, technical experts, and our intelligent agent. Together, we drive disruptive innovation and build a thriving ecosystem.
         </p>
       </div>
 
@@ -146,14 +163,14 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Call to Action Section with FormEmbed */}
+      {/* Call to Action Section with FormEmbed for Partner Application */}
       <div className="max-w-5xl mx-auto mt-16 mb-16 text-center">
-      <div id="partnerForm" className="max-w-4xl mx-auto bg-black rounded-lg shadow-lg p-8">
+        <div id="partnerForm" className="max-w-4xl mx-auto bg-black rounded-lg shadow-lg p-8">
           <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-center text-orange-300 flex items-center justify-center gap-2">
             <FaHandshake className="text-orange-300 text-4xl md:text-5xl transition-transform duration-200 hover:scale-110" /> Partner Application
           </h2>
           <p className="text-lg text-gray-300 mb-6 text-center">
-            Are you a VC or VP interested in strategic investments? Complete the form below to join our Closed Partner Program.
+            Are you a VC or VP interested in strategic investments and joining a sustainable, profit‑driven ecosystem? Complete the form below to join our Closed Partner Program.
           </p>
           <FilloutEmbed
             style={{ width: '100%', height: '500px' }}
